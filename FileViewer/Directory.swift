@@ -69,6 +69,8 @@ public struct Directory  {
   public init( folderURL:NSURL ) {
     url = folderURL
     let requiredAttributes = [NSURLLocalizedNameKey, NSURLEffectiveIconKey,NSURLTypeIdentifierKey,NSURLCreationDateKey,NSURLFileSizeKey, NSURLIsDirectoryKey,NSURLIsPackageKey]
+    
+    
     if let enumerator = NSFileManager.defaultManager().enumeratorAtURL(folderURL, includingPropertiesForKeys: requiredAttributes, options: [.SkipsHiddenFiles, .SkipsPackageDescendants, .SkipsSubdirectoryDescendants], errorHandler: nil) {
       
       while let url  = enumerator.nextObject() as? NSURL {
