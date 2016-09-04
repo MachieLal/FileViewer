@@ -69,12 +69,19 @@ public struct Directory  {
   public init( folderURL:NSURL ) {
     url = folderURL
     let requiredAttributes = [NSURLLocalizedNameKey, NSURLEffectiveIconKey,NSURLTypeIdentifierKey,NSURLCreationDateKey,NSURLFileSizeKey, NSURLIsDirectoryKey,NSURLIsPackageKey]
+    func errorhandler (url: NSURL, error: NSError) -> Bool
+    {
+        print("The error = \(error)")
+        return true
+    }
     
-    
-    if let enumerator = NSFileManager.defaultManager().enumeratorAtURL(folderURL, includingPropertiesForKeys: requiredAttributes, options: [.SkipsHiddenFiles, .SkipsPackageDescendants, .SkipsSubdirectoryDescendants], errorHandler: nil) {
-      
+    if let enumerator = NSFileManager.defaultManager().enumeratorAtURL(folderURL, includingPropertiesForKeys: requiredAttributes, options: [.SkipsHiddenFiles, .SkipsPackageDescendants, .SkipsSubdirectoryDescendants], errorHandler: errorhandler) {
+        
+//      let object = enumerator.directoryAttributes!
+//        print(object);
+        
       while let url  = enumerator.nextObject() as? NSURL {
-        print( "\(url )")
+        print( "\n\(url )")
         
         do{
           
